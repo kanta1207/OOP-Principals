@@ -1,17 +1,26 @@
-class ProductItem {
-  product: Product;
+import { Product } from './Product.js';
 
-  constructor(product: Product) {
-    this.product = product;
-  }
-
-  addToCart() {
+export class ProductItem {
+  static addToCart(product: Product) {
     // just console.log the product for now
-    console.log(this.product);
+    console.log(product);
   }
 
-  render(): string {
-    // return the product element with the product data (<li>)
-    return `<li>${this.product.title} - $${this.product.price} <button onClick="this.addToCart()">Add to Cart</button></li>`;
+  static createElement(product: Product): HTMLElement {
+    const liEle = document.createElement('li');
+    liEle.className = 'product-item';
+    liEle.innerHTML = `<div>
+  <img
+    src="${product.image}"
+    alt="${product.title}"
+  />
+  <div class="product-item__content">
+    <h2>${product.title}</h2>
+    <h3>$${product.price}</h3>
+    <p>${product.description}</p>
+    <button onClick="${ProductItem.addToCart(product)}">Add to Cart</button>
+  </div>
+</div>`;
+    return liEle;
   }
 }

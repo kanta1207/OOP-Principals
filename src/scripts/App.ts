@@ -1,18 +1,29 @@
-class App {
-  static shoppingCart: ShoppingCart = new ShoppingCart();
+import { Shop } from './Shop.js';
+import { ShoppingCart } from './ShoppingCart.js';
+import { ProductList } from './ProductList.js';
 
-  static init() {
-    const shop = new Shop();
+class App {
+  protected shop: Shop;
+  constructor(shop: Shop) {
+    this.shop = shop;
+  }
+
+  async init() {
     const appContainer = document.getElementById('app');
     if (appContainer) {
-      appContainer.innerHTML = shop.render();
+      await shop.init();
+      const { shoppingCartEle, productListEle } = this.shop.createElements();
+      appContainer.appendChild(shoppingCartEle);
+      appContainer.appendChild(productListEle);
+    } else {
+      throw new Error('app element is not defined.');
     }
   }
-
-  static addProductToCart(productItem: ProductItem) {
-    this.shoppingCart.items.push(productItem.product);
-    this.shoppingCart.render();
-  }
 }
+const shoppingCart = new ShoppingCart();
+const productList = new ProductList();
+const shop = new Shop(productList, shoppingCart);
 
-App.init();
+const app = new App(shop);
+
+app.init();
