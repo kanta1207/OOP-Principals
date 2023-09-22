@@ -21,7 +21,7 @@ class App {
   }
 }
 const shoppingCart = new ShoppingCart();
-const productList = new ProductList();
+const productList = new ProductList(shoppingCart);
 const shop = new Shop(productList, shoppingCart);
 
 const app = new App(shop);

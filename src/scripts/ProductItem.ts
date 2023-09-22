@@ -1,12 +1,16 @@
 import { Product } from './Product.js';
-
+import { ShoppingCart } from './ShoppingCart.js';
 export class ProductItem {
-  static addToCart(product: Product) {
-    // just console.log the product for now
-    console.log(product);
+  static addToCart(product: Product, shoppingCart: ShoppingCart) {
+    console.log('add to cart');
+    shoppingCart.addToCart(product);
+    console.log(shoppingCart);
   }
 
-  static createElement(product: Product): HTMLElement {
+  static createElement(
+    product: Product,
+    shoppingCart: ShoppingCart
+  ): HTMLElement {
     const liEle = document.createElement('li');
     liEle.className = 'product-item';
     liEle.innerHTML = `<div>
@@ -18,9 +22,16 @@ export class ProductItem {
     <h2>${product.title}</h2>
     <h3>$${product.price}</h3>
     <p>${product.description}</p>
-    <button onClick="${ProductItem.addToCart(product)}">Add to Cart</button>
+    <button>Add to Cart</button>
   </div>
 </div>`;
+
+    const button = liEle.querySelector('button');
+    if (button) {
+      button.addEventListener('click', () => {
+        ProductItem.addToCart(product, shoppingCart);
+      });
+    }
     return liEle;
   }
 }
