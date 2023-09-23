@@ -12,7 +12,6 @@ export class ProductList {
   async fetchProducts(): Promise<void> {
     const response = await fetch('https://fakestoreapi.com/products');
     const data = await response.json();
-    console.log(data);
 
     this.products = data;
   }
@@ -20,7 +19,6 @@ export class ProductList {
   createElement(): HTMLElement {
     const container = document.createElement('section');
     container.id = 'section-product-list';
-    console.log(this.products);
 
     const ulEle = document.createElement('ul');
 

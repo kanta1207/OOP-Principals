@@ -2,9 +2,7 @@ import { Product } from './Product.js';
 import { ShoppingCart } from './ShoppingCart.js';
 export class ProductItem {
   static addToCart(product: Product, shoppingCart: ShoppingCart) {
-    console.log('add to cart');
     shoppingCart.addToCart(product);
-    console.log(shoppingCart);
   }
 
   static createElement(
