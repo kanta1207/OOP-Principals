@@ -1,10 +1,10 @@
-import { Shop } from './Shop.js';
-import { ShoppingCart } from './ShoppingCart.js';
-import { ProductList } from './ProductList.js';
+import { ShopController } from './controller/Shop.controller.js';
+import { ShoppingCartController } from './controller/section/ShoppingCart.controller.js';
+import { BrowseController } from './controller/section/Browse.controller.js';
 
 class App {
-  protected shop: Shop;
-  constructor(shop: Shop) {
+  protected shop: ShopController;
+  constructor(shop: ShopController) {
     this.shop = shop;
   }
 
@@ -12,17 +12,17 @@ class App {
     const appContainer = document.getElementById('app');
     if (appContainer) {
       await shop.init();
-      const { shoppingCartEle, productListEle } = this.shop.createElements();
+      const { shoppingCartEle, browseEle } = this.shop.createElements();
       appContainer.appendChild(shoppingCartEle);
-      appContainer.appendChild(productListEle);
+      appContainer.appendChild(browseEle);
     } else {
       throw new Error('app element is not defined.');
     }
   }
 }
-const shoppingCart = new ShoppingCart();
-const productList = new ProductList(shoppingCart);
-const shop = new Shop(productList, shoppingCart);
+const shoppingCart = new ShoppingCartController();
+const browse = new BrowseController(shoppingCart);
+const shop = new ShopController(browse, shoppingCart);
 
 const app = new App(shop);
 

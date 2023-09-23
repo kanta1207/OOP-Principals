@@ -1,14 +1,15 @@
-import { Product } from './Product.js';
+import { Product } from '../../model/Product.js';
+import { SectionController } from '../../abstracts/Section.controller.js';
 
-export class ShoppingCart {
-  items: Product[] = [];
+export class ShoppingCartController extends SectionController {
+  products: Product[] = [];
 
   getTotal(): number {
-    return this.items.reduce((total, product) => total + product.price, 0);
+    return this.products.reduce((total, product) => total + product.price, 0);
   }
 
   addToCart(product: Product): void {
-    this.items.push(product);
+    this.products.push(product);
     const targetEle = document.getElementsByClassName('cart')[0];
     targetEle.innerHTML = ` <h2>Total: $${this.getTotal()}</h2> <button>Order Now!</button>`;
   }

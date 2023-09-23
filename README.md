@@ -156,7 +156,3 @@ These OOP principles provide a foundation for designing modular, maintainable, a
 
   - Successfully implemented a simulated online shop using TypeScript and adhering to OOP principles.
   - Demonstrated the effective use of classes for organizing and managing the shop's functionalities.
-
-- We faced several challenges during the project, but through collaboration and adhering to best practices, we overcame them.
-
-- We invite questions and discussions from the audience to further explore the project and its technical aspects.
