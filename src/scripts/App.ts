@@ -1,20 +1,29 @@
-class App {
-  static shoppingCart: ShoppingCart = new ShoppingCart();
+import { Shop } from './Shop.js';
+import { ShoppingCart } from './ShoppingCart.js';
+import { ProductList } from './ProductList.js';
 
-  static init() {
-    // Initialize the app by creating an instance of the Shop class and calling the render method of the Shop class
-    const shop = new Shop();
+class App {
+  protected shop: Shop;
+  constructor(shop: Shop) {
+    this.shop = shop;
+  }
+
+  async init() {
     const appContainer = document.getElementById('app');
     if (appContainer) {
-      appContainer.innerHTML = shop.render();
+      await shop.init();
+      const { shoppingCartEle, productListEle } = this.shop.createElements();
+      appContainer.appendChild(shoppingCartEle);
+      appContainer.appendChild(productListEle);
+    } else {
+      throw new Error('app element is not defined.');
     }
   }
-
-  static addProductToCart(productItem: ProductItem) {
-    // Add the product to the cart by calling the addToCart method of the Cart class
-    this.shoppingCart.items.push(productItem.product);
-    this.shoppingCart.render();
-  }
 }
+const shoppingCart = new ShoppingCart();
+const productList = new ProductList(shoppingCart);
+const shop = new Shop(productList, shoppingCart);
 
-App.init();
+const app = new App(shop);
+
+app.init();

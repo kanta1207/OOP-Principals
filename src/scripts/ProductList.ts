@@ -1,18 +1,36 @@
-class ProductList {
-  products: Product[] = [];
+import { Product } from './Product.js';
+import { ProductItem } from './ProductItem.js';
+import { ShoppingCart } from './ShoppingCart.js';
 
+export class ProductList {
+  products: Product[] = [];
+  shoppingCart: ShoppingCart;
+
+  constructor(shoppingCart: ShoppingCart) {
+    this.shoppingCart = shoppingCart;
+  }
   async fetchProducts(): Promise<void> {
-    // Fetch the products from the API and populate the products array
     const response = await fetch('https://fakestoreapi.com/products');
     const data = await response.json();
+
     this.products = data;
   }
 
-  render(): string {
-    // Render the products by looping through the products array and creating a new ProductItem instance for each product.
-    const productItems = this.products
-      .map((product) => new ProductItem(product).render())
-      .join('');
-    return `<ul>${productItems}</ul>`;
+  createElement(): HTMLElement {
+    const container = document.createElement('section');
+    container.id = 'section-product-list';
+
+    const ulEle = document.createElement('ul');
+
+    for (let i = 0; i < this.products.length; i++) {
+      const product = this.products[i];
+      const productItemEle = ProductItem.createElement(
+        product,
+        this.shoppingCart
+      );
+      ulEle.appendChild(productItemEle);
+    }
+
+    return ulEle;
   }
 }
