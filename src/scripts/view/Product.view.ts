@@ -1,3 +1,4 @@
+import { ShoppingCartController } from '../controller/section/ShoppingCart.controller.js';
 import { Product } from '../model/Product.js';
 export class ProductView {
   private static createElement(
@@ -59,7 +60,7 @@ export class ProductView {
     container.className = 'toggleButton-container';
     const toggleButtonEle = document.createElement('button');
     toggleButtonEle.className = 'toggleButton';
-    toggleButtonEle.innerHTML = `▼`;
+    toggleButtonEle.innerHTML = `▲`;
 
     const sectionTitleEle = document.createElement('h2');
     sectionTitleEle.innerHTML = sectionTitle;
@@ -70,10 +71,10 @@ export class ProductView {
         productListEle.style.display === ''
       ) {
         productListEle.style.display = 'grid';
-        toggleButtonEle.innerHTML = `▼`;
+        toggleButtonEle.innerHTML = `▲`;
       } else {
         productListEle.style.display = 'none';
-        toggleButtonEle.innerHTML = `▲`;
+        toggleButtonEle.innerHTML = `▼`;
       }
     });
     container.appendChild(toggleButtonEle);
@@ -106,7 +107,11 @@ export class ProductView {
   static createOrderableProductListEle(
     products: Product[],
     sectionTitle: string,
-    orderFunc: (product: Product) => void,
+    addToCartFunc: (
+      product: Product,
+      shoppingCartController: ShoppingCartController
+    ) => void,
+    shoppingCartController: ShoppingCartController,
     createEleOption: Partial<CreateEleOption> = {}
   ): HTMLElement {
     const container = document.createElement('div');
@@ -121,7 +126,7 @@ export class ProductView {
       if (buttonEle) {
         buttonEle.innerHTML = 'Add to Cart';
         buttonEle.addEventListener('click', () => {
-          orderFunc(product);
+          addToCartFunc(product, shoppingCartController);
         });
       }
       // append productItem Ele to ul ele

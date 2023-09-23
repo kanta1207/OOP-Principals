@@ -17,13 +17,13 @@ export class ShopController {
   }
 
   createElements(): ShopAppElements {
-    const shoppingCartEle = this.shoppingCartController.createElement();
-    const browseEle = this.browseController.createElement();
-    return { shoppingCartEle, browseEle };
+    const shoppingCartSection = this.shoppingCartController.createSection();
+    const browseSection = this.browseController.createSection();
+    return { shoppingCartSection, browseSection };
   }
 }
 
 type ShopAppElements = {
-  shoppingCartEle: HTMLElement;
-  browseEle: HTMLElement;
+  shoppingCartSection: HTMLElement;
+  browseSection: HTMLElement;
 };

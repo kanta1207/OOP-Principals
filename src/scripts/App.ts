@@ -12,9 +12,9 @@ class App {
     const appContainer = document.getElementById('app');
     if (appContainer) {
       await shop.init();
-      const { shoppingCartEle, browseEle } = this.shop.createElements();
-      appContainer.appendChild(shoppingCartEle);
-      appContainer.appendChild(browseEle);
+      const { shoppingCartSection, browseSection } = this.shop.createElements();
+      appContainer.appendChild(shoppingCartSection);
+      appContainer.appendChild(browseSection);
     } else {
       throw new Error('app element is not defined.');
     }

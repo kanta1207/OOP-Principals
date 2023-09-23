@@ -2,5 +2,5 @@ import { Product } from '../model/Product.js';
 
 export abstract class SectionController {
   protected products: Product[] = [];
-  abstract createElement(): HTMLElement;
+  abstract createSection(): HTMLElement;
 }

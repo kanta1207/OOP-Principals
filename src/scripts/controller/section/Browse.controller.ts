@@ -18,18 +18,19 @@ export class BrowseController extends SectionController {
     this.products = data;
   }
 
-  addToCart(product: Product) {
-    this.shoppingCartController.addToCart(product);
+  addToCart(product: Product, shoppingCartController: ShoppingCartController) {
+    shoppingCartController.addToCart(product);
   }
 
-  createElement(): HTMLElement {
+  createSection(): HTMLElement {
     const container = document.createElement('section');
     container.id = 'section-browse';
 
     const listEle = ProductView.createOrderableProductListEle(
       this.products,
       'Browse',
-      this.addToCart
+      this.addToCart,
+      this.shoppingCartController
     );
     container.appendChild(listEle);
 
