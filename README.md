@@ -90,4 +90,5 @@ Example:
 
 - By implementing **Inheritance** it will reduce future development time and ensures a higher level of accuracy.
 
-- By implementing **TypeScript**, enhancing development experience.
+- By implementing **TypeScript**, enhancing development experience working with classes.
+
