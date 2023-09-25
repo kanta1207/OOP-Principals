@@ -30,129 +30,64 @@ Follow these steps to get started with this project
 
 5. Start [Live Server](https://marketplace.visualstudio.com/items?itemName=yandeu.five-server)
 
-## Project Objectives
+## Overview
 
-- The goals of this project are as follows:
-  1. Develop a fake online shop using OOP principals.
-  2. Leverage TypeScript for the better developer experience, especially while implementing OOP principals into the project.
+In my project, the directory structure is organized to maintain a clear separation of concerns among different parts of the code. Under the `scripts` directory, I have four distinct types of directories, each with its own unique responsibility.
 
-## How I implemented each of OOP Principles
+## 0. `App.ts`
 
-## 1. Encapsulation
+- **Responsibility**: App initialization
 
-- **Definition**: Encapsulation is the concept of bundling data (attributes) and methods (functions) that operate on the data into a single unit called a class. It restricts direct access to some of an object's components, ensuring that the internal state of an object is consistent and protected from external interference.
+This file is directly placed under the "scripts" directory. Initialize the `Shop.controller.ts` and make the whole app work.
 
-- **Benefits**:
+## 1. `controller` Directory
 
-  - **Data Hiding**: It hides the internal details and provides a controlled interface for interacting with objects.
-  - **Modularity**: Encapsulation promotes modularity by grouping related data and behaviors together.
-  - **Reduced Complexity**: It simplifies the complexity of accessing and modifying an object's attributes.
+- **Responsibility**: Application Logic
 
-  ### Implementation in the Project
+The `controller` directory contains files responsible for managing the application's logic. Controllers utilize the view logic and create a logic to make the entire application (or each section) work as intended.
 
-- **Product Class**:
-  - Encapsulates the properties of a product (`id`, `title`, `price`, `description`, `image`) within a class.
-- **ShoppingCart Class**:
+Example:
 
-  - Encapsulates the cart's properties (`items`) and behavior within a class.
-  - Uses encapsulation to hide the inner workings of the cart.
+- `Browse.controller.ts` : Manages the logic for "Browse" section. Utilize "view" class's logic, and also interact with "shopping cart" section by utilizing "ShoppingCartController" class's logic.
 
-- **ProductList Class**:
+- `ShoppingCart.controller.ts` : Manages the logic for "shopping cart" section.
+- `Shop.controller.ts`: Binds the each sections controller classes,initialize them, and make them work together.
 
-  - Encapsulates the list of products (`products`) and their management.
-  - Keeps the product data contained within the class.
+## 2. `view` Directory
 
-- **Shop Class**:
+- **Responsibility**: View Logic
 
-  - Encapsulates the shop's functionality, managing product lists and shopping carts.
-  - Provides a high-level interface for interacting with the shop.
+The `view` directory contains files responsible for handling the presentation and user interface logic of your application. Views are responsible for providing HTML elements to controller classes.
 
-- **App Class**:
-  - Encapsulates the initialization and management of the entire application.
-  - Provides a clear entry point for the application's execution.
+Example:
 
-## 2. Inheritance
+- `Product.view.ts`: Generates HTML elements related to products.
+- `Util.view.ts`: Generates common HTML elements.
 
-- **Definition**: Inheritance is a mechanism that allows a class (subclass or derived class) to inherit properties and behaviors (attributes and methods) from another class (superclass or base class). It promotes code reuse and establishes a hierarchy of classes.
+## 3. `abstract` Directory
 
-- **Benefits**:
-  - **Code Reusability**: Inherited attributes and methods can be reused in the subclass without duplicating code.
-  - **Polymorphism**: It enables polymorphic behavior, where objects of different classes can be treated as objects of a common superclass.
+- **Responsibility**: Base Class Definitions
 
-### Implementation in the Project
+This directory is dedicated to defining base classes that serve as the foundation for other parts of the code. These base classes often contain common properties or methods that are shared across multiple classes.
 
-- **ProductItem Class**:
-  - Inherits properties and methods from the base `Product` class.
-  - Demonstrates inheritance by extending the functionality of a base class.
+Example:
 
-## 3. Polymorphism
+- `Section.Controller.ts` defines the base abstract class for each of section controller class.
 
-- **Definition**: Polymorphism is the ability of different classes to be treated as instances of a common superclass. It allows objects of different classes to respond to the same method or message in a way that is specific to their individual class.
+## 4. `model` Directory
 
-- **Benefits**:
-  - **Flexibility**: Polymorphism allows for flexibility in designing and extending classes.
-  - **Dynamic Binding**: Method calls are determined at runtime, enabling dynamic behavior based on the actual object type.
-  - **Code Abstraction**: It abstracts the specific implementation details, promoting high-level code design.
+- **Responsibility**: Object Definitions
 
-### Implementation in the Project
+The `model` directory is responsible for defining the object structures or classes that represent various entities within your application.
 
-- **ProductItem Class**:
-  - Provides a `render` method to render product information.
-  - Defines a `addToCart` method for adding products to the cart.
-  - Demonstrates polymorphism by allowing different product items to be rendered and added to the cart using consistent method names.
+Example:
 
-## 4. Abstraction
+- `Product.ts`: Defines the `Product` class, which represents individual product.
 
-- **Definition**: Abstraction is the process of simplifying complex reality by modeling classes based on the essential properties and behaviors of real-world objects. It focuses on what an object does rather than how it does it.
+## Key achievements of the project:
 
-- **Benefits**:
-  - **Complexity Reduction**: Abstraction simplifies complex systems by focusing on essential details.
-  - **Problem Solving**: It aids in problem-solving by representing real-world concepts and entities as classes.
-  - **Information Hiding**: It hides the complex inner workings, exposing only necessary interfaces.
+- By **separating the concern(or responsibility)** in each classes, and by **the encapsulation** in each classes, this project is designed to be **easier on collaborative development**.
 
-### Implementation in the Project
+- By implementing **Inheritance** it will reduce future development time and ensures a higher level of accuracy.
 
-- **ProductList Class**:
-
-  - Abstracts the process of fetching product data from an API.
-  - Hides the low-level details of the API request and response handling.
-
-- **ShoppingCart Class**:
-  - Abstracts the management of cart items and total calculation.
-  - Provides a simplified interface for interacting with the shopping cart.
-
-## 5. Composition
-
-- **Definition**: Composition is a design principle where complex structures or objects are created by combining simpler components or objects. Instead of using inheritance, objects are combined to achieve a desired functionality.
-
-- **Benefits**:
-  - **Flexibility**: Composition allows for greater flexibility in constructing objects with varying behaviors.
-  - **Reusability**: It promotes reusability by using existing components to build more complex objects.
-  - **Loose Coupling**: Components are loosely coupled, making it easier to change or replace them without affecting the entire system.
-
-### Implementation in the Project
-
-- **App Class**:
-  - Composes the application by creating instances of the `Shop`, `ProductList`, and `ShoppingCart` classes.
-  - Manages the interaction between these components, showcasing composition.
-
-These OOP principles provide a foundation for designing modular, maintainable, and extensible software systems.
-
-## TypeScript and OOP
-
-- TypeScript offers several advantages for my project:
-
-  - Strong typing enhances code quality and reduces errors.
-  - Improved code readability and maintainability.
-
-- OOP principles applied in my project:
-  - **Encapsulation**: Each class has well-defined responsibilities and properties.
-  - **Inheritance**: Classes like **ProductItem** inherit properties from **Product**.
-  - **Polymorphism**: Methods such as `render` and `addToCart` are consistently used across various classes.
-
-## Conclusion
-
-- Key achievements of the project:
-
-  - Successfully implemented a simulated online shop using TypeScript and adhering to OOP principles.
-  - Demonstrated the effective use of classes for organizing and managing the shop's functionalities.
+- By implementing **TypeScript**, enhancing development experience.
